@@ -15,6 +15,12 @@ node("Component") {
     stage("Checkout") {
         checkout scm
     }
+    stage('SonarQube analysis') {
+        def scannerHome = tool 'SonarQube4';
+        withSonarQubeEnv('sonar-qtauto.lp.luxoft.com') { 
+	    sh "${scannerHome}/bin/sonar-scanner"
+        } 
+    }
 
     stage("Build Docker container") {
         image = docker.build("template-dbus-service", "--build-arg UID=\$(id -u) \
