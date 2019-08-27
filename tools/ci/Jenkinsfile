@@ -18,7 +18,7 @@ node("Component") {
     stage('SonarQube analysis') {
         def scannerHome = tool 'SonarQube4';
         withSonarQubeEnv('sonar-qtauto.lp.luxoft.com') { 
-	    sh "${scannerHome}/bin/sonar-scanner"
+	    sh "cd template-dbus-service && ${scannerHome}/bin/sonar-scanner"
         } 
     }
 
